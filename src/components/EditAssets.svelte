@@ -21,13 +21,15 @@
       return COINS;
     }
   };
-  console.log(search);
+  const handleInput = (e:any) => {
+    search = e?.target?.value;
+  };
 </script>
 
 <div
   on:click={onClose}
   class="fixed min-h-screen w-full flex justify-center items-center bg-black/30 backdrop-blur-lg"
-></div>
+/>
 <div
   class=" absolute translate-y-[-50%] w-[511px] border border-[#E7EAF3] top-[50%] border-b border-b-[#E7EAF3] rounded-[8px] bg-white"
 >
@@ -50,7 +52,7 @@
     >
       <Search />
       <input
-        on:input={(e) => (search = e?.target?.value)}
+        on:input={handleInput}
         placeholder="Search for asset"
         class="outline-none font-[400] text-[14px] text-[#9FAAC4]"
       />

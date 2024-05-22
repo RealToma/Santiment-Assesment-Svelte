@@ -4,12 +4,25 @@
   import Modal from "./components/EditAssets.svelte";
   import { setContext } from "svelte";
   export let open: boolean = false;
-  export let coins = COINS.slice(0, 20);
+  let search = "";
+
+  const getFilteredCountries = (_:any, stringToMatch:string) => {
+    if (stringToMatch) {
+      return COINS.filter((coin:any) => {
+        return (
+          coin.name.toLowerCase()?.includes(stringToMatch.toLowerCase()) ||
+          coin?.code?.includes(stringToMatch.toUpperCase())
+        );
+      });
+    } else {
+      return COINS.slice(0, 20);
+    }
+  };
   const handleOpenModal = () => {
     open = true;
   };
-  const setCoins = (newCoins:any) => {
-    coins = newCoins;
+  const handleInput = (e:any) => {
+    search = e?.target?.value;
   };
 
   setContext("open", { open });
@@ -27,12 +40,13 @@
       >
         <Search />
         <input
+          on:input={handleInput}
           placeholder="Search for asset"
           class="outline-none font-[400] text-[14px] text-[#9FAAC4]"
         />
       </div>
       <div class="mt-[16px] pl-[6px] max-h-[278px] overflow-y-auto">
-        {#each coins as coin}
+        {#each getFilteredCountries(null,search) as coin}
           <div class="flex py-[6px] items-center gap-x-[6px]">
             <img
               class="w-4 h-4 rounded-full"
