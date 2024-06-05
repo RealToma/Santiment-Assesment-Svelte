@@ -5,7 +5,7 @@ const defaultCoins = COINS.slice(0, 10)
 
 export const coins = writable([...defaultCoins])
 export const searchTerm = writable('')
-export const selectedCoins = writable([])
+export const selectedCoins = writable([...defaultCoins])
 
 const filterCoins = (term) => {
   if (term === '' && get(selectedCoins).length === 0) {
