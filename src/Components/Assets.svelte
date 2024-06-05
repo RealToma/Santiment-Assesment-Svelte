@@ -1,18 +1,6 @@
 <script>
   import Selector from '@/Asset/Selector.svelte'
-  import { COINS } from '@/Mock/coins'
-
-  let searchTerm = ''
-  let filteredCoins = COINS
-
-  const search = () => {
-    filteredCoins = filteredCoins.filter((el) =>
-      el.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
-    )
-    if (!searchTerm) {
-      filteredCoins = COINS
-    }
-  }
+  import { coins, searchTerm } from '@/stores/coins'
 </script>
 
 <div class="row main_screen hv-center">
@@ -33,20 +21,14 @@
             fill="#9FAAC4"
           />
         </svg>
-        <input
-          bind:value={searchTerm}
-          on:input={search}
-          type="text"
-          placeholder="Search for asset"
-        />
+        <input bind:value={$searchTerm} type="text" placeholder="Search for asset" />
       </div>
     </div>
     <div class="coins_content">
       <div class="column">
-        {#each filteredCoins as coin}
+        {#each $coins as coin}
           <div class="row v-center coint_item">
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <img src={coin.logoUrl} class="coint_images coin" />
+            <img src={coin.logoUrl} class="coint_images coin" alt="" />
             <p class="body-3 c-black">
               {coin.name}
             </p>

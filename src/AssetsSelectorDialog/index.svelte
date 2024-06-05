@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { get } from 'svelte/store'
   import { COINS } from '@/Mock/coins'
-
+  import { selectedCoins, coins } from '@/stores/coins'
   import Dialog from 'webkit/ui/Dialog'
   import CoinItem from './CoinItem.svelte'
   import Close from '@/Icons/close.svelte'
@@ -16,6 +17,10 @@
     if (!searchTerm) {
       filteredCoins = COINS
     }
+  }
+  const applyChanges = () => {
+    coins.set(get(selectedCoins))
+    closeDialog()
   }
 </script>
 
@@ -53,7 +58,9 @@
     </div>
   </div>
   <div class="button_wrapper">
-    <button class="fluid row h-center btn btn-1 edit_btn">Apply changes</button>
+    <button class="fluid row h-center btn btn-1 edit_btn" on:click={applyChanges}
+      >Apply changes</button
+    >
     <button class="fluid row h-center btn btn-1 edit_btn" on:click={() => closeDialog()}
       >Cancel</button
     >
