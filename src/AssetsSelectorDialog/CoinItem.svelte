@@ -4,8 +4,8 @@
   export let coin
 </script>
 
-<div class="row v-center coin_item " on:click={() => (checked = !checked)}>
-  <Checkbox isActive={checked} on:click={() => (checked = !checked)} />
+<div class="row v-center coin_item" on:click={() => (checked = !checked)}>
+  <Checkbox isActive={checked} />
   <!-- svelte-ignore a11y-missing-attribute -->
   <img src={coin.logoUrl} class="coin_images coin" />
   <p class="body-3 c-black">
