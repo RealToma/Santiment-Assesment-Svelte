@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES2016",
+    "module": "esnext",
+    "importsNotUsedAsValues": "remove",
+    "isolatedModules": true,
+    "sourceMap": true,
+    "sourceRoot": "../src",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "checkJs": true,
+    "strictNullChecks": true,
+    "declaration": true,
+    "paths": {
+      "@/*": [
+        "../src/*"
+      ],
+      "webkit/*": [
+        "../node_modules/san-webkit/lib/*"
+      ],
+      "webkit": [
+        "../node_modules/san-webkit/lib"
+      ],
+      "san-chart/*": [
+        "../node_modules/@santiment-network/chart/*"
+      ],
+      "san-chart": [
+        "../node_modules/@santiment-network/chart"
+      ]
+    }
+  },
+  "include": [
+    "../src/**/*.d.ts",
+    "../src/**/*.ts",
+    "../src/**/*.js",
+    "../src/**/*.svelte"
+  ],
+  "exclude": [
+    "node_modules/*",
+    "../src/**/*.test.js",
+    "../src/main.ts"
+  ]
+}

@@ -1,27 +1,64 @@
 {
-  "name": "project",
-  "private": true,
-  "version": "0.0.0",
+  "name": "test-project",
+  "version": "0.0.1",
+  "author": "",
+  "types": "lib/types/index.d.ts",
   "type": "module",
+  "lint-staged": {
+    "*.{js,ts,svelte,css,md,mdx}": [
+      "prettier --write"
+    ]
+  },
+  "precommit": [
+    "test"
+  ],
+  "prepush": [
+    "test"
+  ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000 --host",
+    "dev:s": "vite --port 3000 --host --https",
     "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "serve": "vite preview",
+    "test": "jest",
+    "validate": "svelte-check",
+    "validate:errors": "yarn validate --threshold error",
+    "ts": "tsc --outDir ./lib --p ./scripts/tsconfig.json",
+    "lib": "npm run lib:prepare && node scripts/lib.js",
+    "lib:prepare": "npm run lib:clean && npm run ts",
+    "lib:clean": "node scripts/clean.js",
+    "lib:publish": "node scripts/publish",
+    "prepare": "husky install && patch-package"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.0.2",
-    "@tsconfig/svelte": "^5.0.2",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "svelte": "^4.2.12",
-    "svelte-check": "^3.6.7",
-    "tailwindcss": "^3.4.3",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "@babel/plugin-proposal-optional-chaining": "^7.18.9",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "eslint-svelte3-preprocess": "0.0.5",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "marked": "^4.0.12",
+    "prettier": "^2.8.4",
+    "prettier-plugin-svelte": "^2.9.0",
+    "san-webkit": "https://github.com/santiment/san-webkit#a39ba94",
+    "svelte": "^4.1.1",
+    "svelte-check": "^1.5.2",
+    "svelte-preprocess": "^5.0.4",
+    "svelte-preprocess-cssmodules": "https://github.com/DmitriVanGuard/svelte-preprocess-cssmodules#3b24f22",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.7.4",
+    "vite": "^4.3.5",
+    "vite-plugin-ts-checker": "^0.1.5"
   },
-  "dependencies": {
-    "flowbite": "^2.3.0"
+  "peerDependencies": {
+    "svelte": "^3.56.0",
+    "@santiment-network/chart": "^0.10.19",
+    "san-webkit": "https://github.com/santiment/san-webkit"
   }
 }
